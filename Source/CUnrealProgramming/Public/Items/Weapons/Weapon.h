@@ -7,6 +7,7 @@
 #include "Weapon.generated.h"
 
 class USoundBase;
+class UBoxComponent;
 /**
  * 
  */
@@ -15,6 +16,7 @@ class CUNREALPROGRAMMING_API AWeapon : public AItem
 {
 	GENERATED_BODY()
 public:
+	AWeapon();
 	void EquipWeapon(USceneComponent* InParent, FName InSocketName);
 
 	void AttachMeshToSocket(USceneComponent* InParent, const FName& InSocketName);
@@ -27,4 +29,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Sound")
 	USoundBase* EquipSound;
+
+	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
+	UBoxComponent* WeaponBox;
 };

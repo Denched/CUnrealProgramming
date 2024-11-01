@@ -52,7 +52,11 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* AttackAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	bool MovingLeft;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	bool MovingRight;
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);

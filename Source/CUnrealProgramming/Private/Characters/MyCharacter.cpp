@@ -63,6 +63,30 @@ void AMyCharacter::Move(const FInputActionValue& Value)
 
 	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 	AddMovementInput(RightDirection, MovementVector.X);
+
+	if (MovementVector.X < -0.1f) // Moving left
+	{
+		MovingLeft = true;
+		MovingRight = false;
+	}
+	else if (MovementVector.X > 0.1f) // Moving right
+	{
+		MovingRight = true;
+		MovingLeft = false;
+	}
+	else // Moving forward (or stopping)
+	{
+		MovingLeft = false;
+		MovingRight = false;
+	}
+
+	FVector DesiredMovementDirection = (ForwardDirection * MovementVector.Y) + (RightDirection * MovementVector.X);
+
+	if (!DesiredMovementDirection.IsNearlyZero())
+	{
+		FRotator DesiredRotation = DesiredMovementDirection.Rotation();
+		SetActorRotation(FRotator(0.f, DesiredRotation.Yaw, 0.f));
+	}
 }
 
 void AMyCharacter::Look(const FInputActionValue& Value)
